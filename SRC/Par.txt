@@ -1,0 +1,33 @@
+===============================================================================
+seisfile      =OUTPUT/debug
+modelfile     =MODELS/none
+recfile       =recs
+time          =10.                ! simulation time (sec)
+nop           =4                  ! operator length (keep at 4)
+izfree        =4                  ! free surface layer (izfree >= nop/2+1)
+igraves       =0                  ! method 1=graves 0=symmetry
+attenuate     =1                  ! Attenuation (0=off, 1=on)
+Nk            =8                  ! Number of Memory Variables (should =8)
+Model -------------------------------------------------------------------------
+model_type    =300                ! 1=hom,2=prem,...=user models
+vs0           =5000.              ! vs for homogeneous model
+rho0          =2000.              ! rho for homogeneous model
+Q0            =1000.              ! Q for homogeneous model
+Tmax          =95.0               ! Angular size of model (180=full Earth)
+Source ------------------------------------------------------------------------
+source_type   =1                  ! should always be  =1
+sdepth        =200.0              ! source depth [km]
+aa            =-1.                ! period of source signal (-1 for delta fn)
+it0           =10                 ! time step where signal starts
+Receivers----------------------------------------------------------------------
+izrec         =4                  ! should equal 'izfree' (typically izrec==4)
+OUTPUT-------------------------------------------------------------------------
+gfx_exp       =.33                !
+icheck        =1000               ! Output estimations each 'icheck' timesteps
+tsnap         =10000.             ! output snaps each 'tsnap' seconds
+snapstart     =1                  ! First snapshot to write 
+iout          =1                  ! Snapshot size
+iflush        =10000              ! flush seismograms every 'iflush' time steps
+sacout        =1                  ! (0/1)-output seismograms in SAC format
+kevnm         =debug              ! character descriptor (len=16) 'sacout'=1
+nabs          =10                 ! absorbing boundary at tmax (# grid points)

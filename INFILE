@@ -1,0 +1,148 @@
+
+# ================ DIRs and Files ================
+<WORKDIR>                            /home/shule/PROJ/t052.C5
+<BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
+<CCODEDIR>                           /home/shule/Research/Fun.C.c002
+<CPPCODEDIR>                         /home/shule/Research/Fun.C++.c003
+<NETCDFINCLUDEDIR>                   /home/shule/.local/netcdf/include
+<NETCDFLIBDIR>                       /home/shule/.local/netcdf/lib
+
+<RunOnOffice>                        1
+									 -- 0: On sol, Set the dirs below
+									 -- 1: On office, Set the dirs above
+									 -- 2: On agave.
+
+# ========
+
+<SACDIR>                             /opt/sac
+<OriginFile>                         Original/SHaxi_1.0.40_full.tar
+<FCOMP>                              mpif90
+<MPIRUN>                             mpirun
+<CCOMP>                              gcc
+<CPPCOMP>                            c++
+<CPPFLAG>                            -std=c++11 -Wall
+<FFLAGS>                             -O4 -w -Bstatic
+<NETCDFLIB>                          netcdff
+
+# a01.
+
+<BeginIndex>                         58
+<RankNum>                            4
+<WallTime>                           5-00:00
+
+                                     -- for agave:
+                                     #SBATCH -t 1-12:00                  # wall time (D-HH:MM)
+
+<XSIZE>                              20000
+<ZSIZE>                              3800
+
+<EVDE>                               582.56
+
+<StructureAttenuate>                 0
+<StructureQ>                         20.0
+                                     -- Fortran requires add .0 to integer to be recognized as REAL type.
+                                     -- PREM lower mantle Q value is 312.
+                                     -- fortran maximum real value: 1e37
+
+<GlobalAttenuate>                    0
+									 -- 1 on
+									 -- 0 off
+
+<Length>                             1800.0
+<ThetaMax>                           110.0
+
+<aa>                                 -1.
+
+<DISTMIN>                            40
+<DISTMAX>                            85
+<DISTINC>                            0.1
+
+<ModelType>                          ULVZ
+
+									    -- PREM
+									    -- ULVZ
+										-- Ben (This is only for a03, the benchmark model and shaxi.out need to be hand-made.)
+
+# PREM modification.
+# Smooth out 24.4, 220, 400, 670 km through +-30 km.
+# Could be multiple smoothing, effects will accumulate.
+# For ScS studies, use SplineTo400 and Degree2From600 to get rid of wiggles between S and ScS.
+<RemoveCrust>                        0
+<Remove220>                          0
+<Remove400>                          0
+<Remove670>                          0
+<SplineTo400>                        1
+<Straight600To771>                   0
+<Degree2From600>                     1
+<RemoveDepthPhase>                   0
+
+                                     -- Tried adding an absorbind boundary condition
+									    at the surface between 0 ~ 30 deg. But it doesn't
+										work as good as expected. Use =0 for now.
+
+<DefineShapes_BEGIN>
+
+Flat 2891 2891 1.0   20  20  1.0   0.9 0.9 1.0   1 1 1.0   25.370 25.370 1   273.3165 273.3165 1
+Flat 2891 2891 1.0   20  20  1.0   0.9 0.9 1.0   1 1 1.0   32.870 32.870 1   273.3165 273.3165 1
+Flat 2891 2891 1.0   20  20  1.0   0.9 0.9 1.0   1 1 1.0   40.370 40.370 1   273.3165 273.3165 1
+Flat 2891 2891 1.0   20  20  1.0   0.9 0.9 1.0   1 1 1.0   47.870 47.870 1   273.3165 273.3165 1
+
+<DefineShapes_END>
+
+
+-- If there are multiple lines between SetModels, will add model represented by each line one by one.
+   Shape parameters:
+
+Flat     : bottom depth | height        | vs | rho | center position (deg) | lateral full size (km)
+Tilting  : bottom depth | center height | vs | rho | center position (deg) | lateral full size (km)    | tilting angle (deg)
+Trapezoid: bottom depth | height        | vs | rho | center position (deg) | upper side full size (km) | lower side full size (km)
+Hill     : bottom depth | height        | vs | rho | center position (deg) | source side size (km)     | receiver side size (km)
+Doom     : bottom depth | height        | vs | rho | center position (deg) | lateral full size (km)
+Mollifier: bottom depth | height        | vs | rho | center position (deg) | upper side full size (km) | lower side full size (km)
+Gaussian : bottom depth | height        | vs | rho | center position (deg) | upper side full size (km) | lower side full size (km) | half-height half width (km)
+
+-- Examples:
+
+Flat        2891.0 2891.0 1.0   20.0 20.0 1.0   0.80 0.80 0.10   1.00 1.00 0.05   5.000  5.000  2.4735   120.0 120.0 1.0
+Tilting     2871.0 2871.0 1.0   20.0 20.0 1.0   0.70 0.70 0.10   1.00 1.00 0.05   15.000 15.000 1.0000   300.0 300.0 1.0   4.0000 4.0000 1.0
+Trapezoid   2891.0 2891.0 1.0   20.0 20.0 5.0   0.80 0.80 0.04   1.00 1.00 0.05   25.000 25.000 10.000   300.0 300.0 1.0   600.00 600.00 1.0
+Hill        2891.0 2891.0 1.0   20.0 20.0 5.0   1.10 1.10 0.04   1.00 1.00 0.05   35.000 35.000 10.000   300.0 300.0 1.0   1300.0 1300.0 1.0
+Doom        2891.0 2891.0 1.0   20.0 20.0 5.0   1.20 1.20 0.04   1.00 1.00 0.05   45.000 45.000 10.000   600.0 600.0 1.0
+Mollifier   2891.0 2891.0 1.0   20.0 20.0 5.0   0.80 0.80 0.04   1.00 1.00 0.05   55.000 55.000 10.000   300.0 300.0 1.0   600.00 600.00 1.0
+Gaussian    2891.0 2891.0 1.0   20.0 20.0 5.0   0.80 0.80 0.04   1.00 1.00 0.05   65.000 65.000 10.000   400.0 400.0 1.0   200.00 200.00 1.0
+
+
+
+# a02.
+<TotalRank>                          32
+                                     -- 32 for sol, 8 for office
+									 ** Also, check RankNum, it's also used in a02.
+
+<HostName>                           n0
+<BeginRun>                           0
+<EndRun>                             0
+
+
+# a03.
+<DominantPeriod>                     10
+
+# a03 & a04.
+<Integrate>                          1
+<StartFrom>                          1
+<EndAt>                              58
+
+# a04.
+<OutputDirectory>                    /home/shule/PROJ/t052.ULVZ_1D_NoNoisy.ULVZ_Flat
+<DB>                                 CA_D
+<SYNDB>                              ScS_SHAXI_1D
+<F1>                                 0.033
+<F2>                                 0.3
+<AddNoise>                           0
+
+# b01.
+<MaxHeight>                          50
+<Zoom_Min>                           15
+<Zoom_Max>                           50
+<ColorScale>                         30
+<StartFrom_Plot>                     1
+<EndAt_Plot>                         58
