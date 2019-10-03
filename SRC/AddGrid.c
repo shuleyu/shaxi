@@ -89,6 +89,7 @@ int main(int argc, char **argv){
 	FILE   *fpin,*fpout;
 
 	// Allocate memories.
+	//Theta_Size=32512/filenr(PS[INFILEs])+8;
 	Theta_Size=20000/filenr(PS[INFILEs])+8;
 	R_Size=3808;
 

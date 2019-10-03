@@ -26,7 +26,7 @@
 
 # a01.
 
-<BeginIndex>                         58
+<BeginIndex>                         1
 <RankNum>                            4
 <WallTime>                           5-00:00
 
@@ -36,7 +36,7 @@
 <XSIZE>                              20000
 <ZSIZE>                              3800
 
-<EVDE>                               582.56
+<EVDE>                               500.0
 
 <StructureAttenuate>                 0
 <StructureQ>                         20.0
@@ -82,10 +82,7 @@
 
 <DefineShapes_BEGIN>
 
-Flat 2891 2891 1.0   20  20  1.0   0.9 0.9 1.0   1 1 1.0   25.370 25.370 1   273.3165 273.3165 1
-Flat 2891 2891 1.0   20  20  1.0   0.9 0.9 1.0   1 1 1.0   32.870 32.870 1   273.3165 273.3165 1
-Flat 2891 2891 1.0   20  20  1.0   0.9 0.9 1.0   1 1 1.0   40.370 40.370 1   273.3165 273.3165 1
-Flat 2891 2891 1.0   20  20  1.0   0.9 0.9 1.0   1 1 1.0   47.870 47.870 1   273.3165 273.3165 1
+Flat 2891 2891 1.0   30  30  1.0   1.10 1.10 1.0   1 1 1.0   50 50 1   10000.0 10000.0 1
 
 <DefineShapes_END>
 
@@ -114,7 +111,7 @@ Gaussian    2891.0 2891.0 1.0   20.0 20.0 5.0   0.80 0.80 0.04   1.00 1.00 0.05 
 
 
 # a02.
-<TotalRank>                          32
+<TotalRank>                          8
                                      -- 32 for sol, 8 for office
 									 ** Also, check RankNum, it's also used in a02.
 
@@ -128,7 +125,7 @@ Gaussian    2891.0 2891.0 1.0   20.0 20.0 5.0   0.80 0.80 0.04   1.00 1.00 0.05 
 
 # a03 & a04.
 <Integrate>                          1
-<StartFrom>                          1
+<StartFrom>                          53
 <EndAt>                              58
 
 # a04.
@@ -141,8 +138,8 @@ Gaussian    2891.0 2891.0 1.0   20.0 20.0 5.0   0.80 0.80 0.04   1.00 1.00 0.05 
 
 # b01.
 <MaxHeight>                          50
-<Zoom_Min>                           15
-<Zoom_Max>                           50
+<Zoom_Min>                           0
+<Zoom_Max>                           110
 <ColorScale>                         30
 <StartFrom_Plot>                     1
-<EndAt_Plot>                         58
+<EndAt_Plot>                         1

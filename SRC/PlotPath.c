@@ -83,7 +83,7 @@ int main(int argc, char **argv){
 
     strcpy(Phase,"ScS");
 
-	npts=9000;
+	npts=15000;
 	ans=(double **)malloc(npts*sizeof(double *));
 	for (Cnt=0;Cnt<npts;Cnt++){
 		ans[Cnt]=(double *)malloc(3*sizeof(double));

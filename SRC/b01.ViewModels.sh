@@ -67,23 +67,23 @@ do
 
 done
 
-for receiver in `seq ${DISTMIN} 1 ${DISTMAX}`
-do
-
-	${EXECDIR}/PlotPath.out 0 1 3 << EOF
-tmpfile_${EVDE}_path_${receiver}_$$
-${EVDE}
-${receiver}
-`echo "${MaxHeight}" | awk '{print 2891-$1-10}'`
-EOF
-
-    if [ $? -ne 0 ]
-    then
-        echo "    !=> PlotPath C code failed on Gcarc: ${receiver} ..."
-        exit 1
-    fi
-
-done
+# for receiver in `seq ${DISTMIN} 1 ${DISTMAX}`
+# do
+# 
+# 	${EXECDIR}/PlotPath.out 0 1 3 << EOF
+# tmpfile_${EVDE}_path_${receiver}_$$
+# ${EVDE}
+# ${receiver}
+# `echo "${MaxHeight}" | awk '{print 2891-$1-10}'`
+# EOF
+# 
+#     if [ $? -ne 0 ]
+#     then
+#         echo "    !=> PlotPath C code failed on Gcarc: ${receiver} ..."
+#         exit 1
+#     fi
+# 
+# done
 
 for count in `seq ${StartFrom_Plot} ${EndAt_Plot}`
 do
